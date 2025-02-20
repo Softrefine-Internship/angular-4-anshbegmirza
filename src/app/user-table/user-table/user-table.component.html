@@ -1,0 +1,42 @@
+<div class="container row">
+  <div class="table-header">
+    <h2>User Table</h2>
+
+    <div class="table-controls">
+      <!-- Search Box -->
+      <input class="form-control" type="text" placeholder="Search..." [ngModel]="searchValue" (input)="search($event)">
+
+      <!-- Sorting dropdown -->
+      <select class="form-control" [ngModel]="sortColumn" (change)="onSortChanges($event)">
+        <option value="">Sort by </option>
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="username">Username</option>
+        <option value="age">Age</option>
+      </select>
+    </div>
+  </div>
+  <!-- Table -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Age</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of filteredUsers; let i = index"
+        [ngStyle]="{'background-color': i % 2 === 0 ? '#FFE6C9' : '#FFC785'}">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
