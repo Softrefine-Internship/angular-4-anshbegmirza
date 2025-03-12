@@ -20,14 +20,18 @@ export class UserTableComponent implements OnInit {
   }
 
   search(event: Event) {
-    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
-    this.searchValue = searchTerm;
-    console.log(this.searchValue, this.filteredUsers);
-    this.filteredUsers = this.users.filter((user) => {
-      return Object.values(user).some((value) =>
-        String(value).toLowerCase().includes(searchTerm)
-      );
-    });
+    const searchValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.searchValue = searchValue;
+    console.log(this.filteredUsers, this.users);
+
+    this.filteredUsers = this.users.filter((user) =>
+      ['username', 'firstName', 'lastName'].some((key) =>
+        user[key]?.toString().toLowerCase().includes(searchValue)
+      )
+    );
+
+    // applying sorting after searching also.
+    this.sort();
   }
 
   sort() {
@@ -49,6 +53,12 @@ export class UserTableComponent implements OnInit {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.sortColumn = selectedValue;
     this.sort();
-    console.log(this.sortColumn, this.filteredUsers);
+    // console.log(this.sortColumn, this.filteredUsers);
+  }
+
+  onReset() {
+    this.filteredUsers = [...this.users]; // Reset to original data
+    this.searchValue = ''; // Clear search input
+    this.sortColumn = ''; // Reset sorting
   }
 }

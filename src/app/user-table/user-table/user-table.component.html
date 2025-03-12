@@ -14,10 +14,13 @@
         <option value="username">Username</option>
         <option value="age">Age</option>
       </select>
+
+      <button class="btn btn-primary" (click)="onReset()">Reset</button>
     </div>
   </div>
   <!-- Table -->
   <table class="table table-bordered">
+    <!-- table head row -->
     <thead>
       <tr>
         <th>First Name</th>
@@ -27,7 +30,7 @@
         <th>Email</th>
       </tr>
     </thead>
-
+    <!-- table data -->
     <tbody>
       <tr *ngFor="let user of filteredUsers; let i = index"
         [ngStyle]="{'background-color': i % 2 === 0 ? '#FFE6C9' : '#FFC785'}">
